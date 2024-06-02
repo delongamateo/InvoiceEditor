@@ -16,14 +16,12 @@ const Test = () => {
   }, [code]);
 
   console.log("Code:", code);
-  const { refetch } = useLoginQuery();
+
 
   return (
     <div>
       <button
-        onClick={() =>
-          refetch().then((res) => (window.location.href = res.data))
-        }
+        
       >
         login
       </button>

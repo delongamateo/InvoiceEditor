@@ -1,6 +1,7 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import Test from "../Test";
 import { App } from "../App";
+import Dashboard from "../screens/Dashboard";
 
 export const Route = createLazyFileRoute("/_auth/")({
   component: Index,
@@ -8,8 +9,8 @@ export const Route = createLazyFileRoute("/_auth/")({
 
 function Index() {
   return (
-    <div className="p-2">
-      <App />
+    <div>
+      <Dashboard />
     </div>
   );
 }

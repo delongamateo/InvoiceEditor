@@ -8,10 +8,11 @@ import {
 } from "@tanstack/react-router";
 import { useAuth } from "../hooks/useAuth";
 import { Flex, Spacer } from "@chakra-ui/react";
+import { ColorModeSwitcher } from "../ColorModeSwitcher";
 
 export const Route = createFileRoute("/_auth")({
   beforeLoad: ({ context, location }) => {
-    if (!context?.auth?.user) {
+    if (context?.auth?.user) {
       throw redirect({
         to: "/login",
         search: {
@@ -46,6 +47,7 @@ function AuthLayout() {
         <Link to="/settings" className="[&.active]:font-bold">
           Settings
         </Link>
+        <ColorModeSwitcher justifySelf="flex-end" />
       </Flex>
       <hr />
       <Outlet />
