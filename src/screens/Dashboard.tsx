@@ -1,15 +1,9 @@
-import {
-  Center,
-  Flex,
-  Stack,
-  useColorModeValue,
-  Heading,
-  Text,
-  Progress,
-} from "@chakra-ui/react";
+import { Flex, Heading, Text, Box, Icon } from "@chakra-ui/react";
 import React from "react";
 import Table from "../components/Table";
 import { createColumnHelper } from "@tanstack/react-table";
+import { FaFileInvoice } from "react-icons/fa";
+import { InfoCards } from "../components/infoCards";
 
 type Invoice = {
   name: string;
@@ -54,62 +48,34 @@ const columns = [
 
 const Dashboard = () => {
   const [data, setData] = React.useState(invoices);
-  const bgColor = useColorModeValue("rgba(0, 0, 0, 0.1)", "rgba(0, 0, 0, 0.4)");
-  const textColor = useColorModeValue("black", "white");
 
   return (
-    <Stack p={12} gap={8}>
-      <Flex gap={8} alignItems="stretch">
-        <Flex
-          bg={bgColor}
-          color={textColor}
-          backdropFilter="blur(10px)"
-          borderRadius="md"
-          p={4}
-          
-          justify="center"
-          width="full"
-          minHeight="full"
-          boxShadow="xl"
-        >
-          <Stack alignItems={"center"} textAlign={"center"}>
-            <Heading>Total Invoices Created</Heading>
-            <Heading>0</Heading>
-          </Stack>
-        </Flex>
-        <Flex
-          bg={bgColor}
-          color={textColor}
-          backdropFilter="blur(10px)"
-          borderRadius="md"
-          p={4}
-          align="center"
-          justify="center"
-          width="full"
-          minHeight="full"
-          boxShadow="xl"
-        >
-          <Stack alignItems={"center"} textAlign={"center"}>
-            <Heading>Invoices Created This Month</Heading>
-            <Heading>3/10</Heading>
-
-            <Progress hasStripe value={30} w={"full"} borderRadius={"xl"} />
-          </Stack>
-        </Flex>
-      </Flex>
+    <Flex p={12} gap={8} align="stretch">
+      <InfoCards />
       <Flex
-        bg={bgColor}
-        color={textColor}
+        color="blue.400"
+        borderColor="blue.400"
+        transition="all 0.3s ease-in-out"
+        border="1px"
+        borderBottom="4px"
         backdropFilter="blur(10px)"
-        borderRadius="md"
         p={4}
         width="full"
-        height="full"
-        boxShadow="xl"
+        flex="1"
+        alignItems="start"
+        borderRadius="lg"
+        direction="column"
+        gap={8}
+        boxShadow="0px 0px 5px 5px rgba(99, 179, 237, 0.1)"
       >
+        <Box display="flex" alignItems="center" p={4} gap={4}>
+          <Icon as={FaFileInvoice} w={8} h={8} mr={2} />
+          <Heading> Invoices Created This Month </Heading>
+        </Box>
+
         <Table data={data} columns={columns} />
       </Flex>
-    </Stack>
+    </Flex>
   );
 };
 
