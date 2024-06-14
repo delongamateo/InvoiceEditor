@@ -1,0 +1,176 @@
+import {
+  Flex,
+  Text,
+  Box,
+  Icon,
+  Button,
+  List,
+  ListItem,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import { FaArrowRight, FaCheck } from "react-icons/fa";
+
+const yearlyPlans = [
+  {
+    title: "Premium Annual Pass",
+    price: "200$Month",
+    invoiceLimit: "100",
+    benefits: [
+      "Full QuickBooks Integration",
+      "Add QR Codes to Invoices",
+      "Online Support",
+      "Scan2pay QR Links (Like PayPal)",
+      "Custom Branding",
+    ],
+  },
+  {
+    title: "Elite Yearly Access",
+    price: "300$Month",
+    invoiceLimit: "300",
+
+    benefits: [
+      "Full QuickBooks Integration",
+      "Add QR Codes to Invoices",
+      "Online Support",
+      "Scan2pay QR Links (Like PayPal)",
+      "Custom Branding",
+    ],
+  },
+  {
+    title: "Ultimate Year Package",
+    price: "400$Month",
+    invoiceLimit: "1000",
+
+    benefits: [
+      "Full QuickBooks Integration",
+      "Add QR Codes to Invoices",
+      "Online Support",
+      "Scan2pay QR Links (Like PayPal)",
+      "Custom Branding",
+    ],
+  },
+  {
+    title: "Gold Membership Plan",
+    price: "500$Month",
+    invoiceLimit: "Unlimited",
+    benefits: [
+      "Full QuickBooks Integration",
+      "Add QR Codes to Invoices",
+      "Online Support",
+      "Scan2pay QR Links (Like PayPal)",
+      "Custom Branding",
+    ],
+  },
+];
+
+const monthlyPlans = [
+  {
+    title: "Premium Montly Pass",
+    price: "20$Month",
+    invoiceLimit: "100",
+    benefits: [
+      "Full QuickBooks Integration",
+      "Add QR Codes to Invoices",
+      "Online Support",
+      "Scan2pay QR Links (Like PayPal)",
+      "Custom Branding",
+    ],
+  },
+  {
+    title: "Elite Montly Access",
+    price: "30$Month",
+    invoiceLimit: "300",
+
+    benefits: [
+      "Full QuickBooks Integration",
+      "Add QR Codes to Invoices",
+      "Online Support",
+      "Scan2pay QR Links (Like PayPal)",
+      "Custom Branding",
+    ],
+  },
+  {
+    title: "Ultimate Month Package",
+    price: "40$Month",
+    invoiceLimit: "1000",
+
+    benefits: [
+      "Full QuickBooks Integration",
+      "Add QR Codes to Invoices",
+      "Online Support",
+      "Scan2pay QR Links (Like PayPal)",
+      "Custom Branding",
+    ],
+  },
+  {
+    title: "Gold Month Plan",
+    price: "50$Month",
+    invoiceLimit: "Unlimited",
+    benefits: [
+      "Full QuickBooks Integration",
+      "Add QR Codes to Invoices",
+      "Online Support",
+      "Scan2pay QR Links (Like PayPal)",
+      "Custom Branding",
+    ],
+  },
+];
+
+const SubscriptionCard = ({ planType }: { planType: string }) => {
+  const textColor2 = useColorModeValue("#4A5567", "#A0AEBF");
+
+  return (
+    <Flex
+      width={"full"}
+      gap={8}
+      alignItems={"center"}
+      justifyContent={"space-around"}
+    >
+      {(planType === "monthly" ? monthlyPlans : yearlyPlans).map(
+        (plan, index) => (
+          <Box
+            key={index}
+            display={"flex"}
+            flexDirection={"column"}
+            color="blue.400"
+            borderColor="blue.400"
+            transition="all 0.3s ease-in-out"
+            border="1px"
+            borderBottom="4px"
+            backdropFilter="blur(10px)"
+            p={8}
+            borderRadius="lg"
+            alignItems={"center"}
+            gap={6}
+            width="20%"
+            fontFamily={"Arial"}
+            boxShadow="0px 0px 5px 5px rgba(99, 179, 237, 0.1)"
+          >
+            <Text fontWeight={900} fontSize={"2xl"} noOfLines={1}>
+              {plan.title}
+            </Text>
+            <Text fontSize={"xl"} color={textColor2}>
+              {plan.price}
+            </Text>
+            <Text color={textColor2}>
+              Generate up to {plan.invoiceLimit} invoices
+            </Text>
+            <List spacing={3}>
+              {plan.benefits.map((benefit, index) => (
+                <ListItem key={index}>
+                  <Icon as={FaCheck} color="green.500" mr={2} />
+                  {benefit}
+                </ListItem>
+              ))}
+            </List>
+            <Button leftIcon={<FaArrowRight />} colorScheme="blue">
+              Choose This Plan
+            </Button>
+          </Box>
+        )
+      )}
+    </Flex>
+  );
+};
+
+export default SubscriptionCard;

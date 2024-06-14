@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "@tanstack/react-router";
 
-import { FaCalendarAlt, FaQrcode } from "react-icons/fa";
+import { FaCalendarAlt, FaQrcode, FaCheck } from "react-icons/fa";
 
 export const InfoCards = () => {
   const textColor = useColorModeValue("blue.400", "blue.400");
@@ -24,7 +24,7 @@ export const InfoCards = () => {
         color={textColor}
         backdropFilter="blur(10px)"
         borderRadius="lg"
-        p={16}
+        p={6}
         align="center"
         justify="center"
         width="full"
@@ -60,7 +60,7 @@ export const InfoCards = () => {
         color="blue.400"
         backdropFilter="blur(10px)"
         borderRadius="lg"
-        p={16}
+        p={6}
         align="center"
         justify="center"
         width="full"
