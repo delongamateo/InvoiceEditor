@@ -12,11 +12,10 @@ const Subscriptions = () => {
       alignItems={"center"}
       justifyContent={"center"}
       width={"full"}
-      pt={12}
       gap={16}
     >
-      <ToggleButton planType={planType} setPlanType={setPlanType} />
       <SubscriptionCard planType={planType} />
+      <ToggleButton planType={planType} setPlanType={setPlanType} />
     </Flex>
   );
 };

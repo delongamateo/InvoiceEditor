@@ -2,6 +2,7 @@ import { createLazyFileRoute } from "@tanstack/react-router";
 import Test from "../Test";
 import { App } from "../App";
 import Dashboard from "../screens/Dashboard";
+import { Flex } from "@chakra-ui/react";
 
 export const Route = createLazyFileRoute("/_auth/")({
   component: Index,
@@ -9,8 +10,13 @@ export const Route = createLazyFileRoute("/_auth/")({
 
 function Index() {
   return (
-    <div>
+    <Flex
+      alignItems={"center"}
+      justifyContent={"center"}
+      height={"90vh"}
+      width={"full"}
+    >
       <Dashboard />
-    </div>
+    </Flex>
   );
 }
