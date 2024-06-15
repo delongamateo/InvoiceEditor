@@ -1,9 +1,10 @@
-import { createLazyFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute } from "@tanstack/react-router";
+import Settings from "../screens/Settings";
 
-export const Route = createLazyFileRoute('/_auth/settings')({
+export const Route = createLazyFileRoute("/_auth/settings")({
   component: About,
-})
+});
 
 function About() {
-  return <div className="p-2">Hello from About!</div>
+  return <Settings />;
 }

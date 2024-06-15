@@ -1,14 +1,14 @@
 import * as React from "react";
 import {
   createFileRoute,
-  Link,
+  Link as RouterLink,
   Outlet,
   redirect,
   useNavigate,
   useRouter,
 } from "@tanstack/react-router";
 import { useAuth } from "../hooks/useAuth";
-import { Button, Flex, Spacer } from "@chakra-ui/react";
+import { Button, Flex, Spacer,Box } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
 
 export const Route = createFileRoute("/_auth")({
@@ -49,21 +49,41 @@ function AuthLayout() {
         fontSize="lg"
       >
         <Flex gap={10}>
-          <Link to="/" className="[&.active]:font-bold">
+          <Box
+            as={RouterLink}
+            to="/"
+            _hover={{ color: "blue.100" }}
+            className="[&.active]:font-bold"
+          >
             Dashboard
-          </Link>
+          </Box>
           <Spacer />
-          <Link to="/new-invoice" className="[&.active]:font-bold">
+          <Box
+            as={RouterLink}
+            to="/new-invoice"
+            _hover={{ color: "blue.100" }}
+            className="[&.active]:font-bold"
+          >
             New Invoice
-          </Link>
+          </Box>
           <Spacer />
-          <Link to="/subscriptions" className="[&.active]:font-bold">
+          <Box
+            as={RouterLink}
+            to="/subscriptions"
+            _hover={{ color: "blue.100" }}
+            className="[&.active]:font-bold"
+          >
             Subscriptions
-          </Link>
+          </Box>
           <Spacer />
-          <Link to="/settings" className="[&.active]:font-bold">
+          <Box
+            as={RouterLink}
+            to="/settings"
+            _hover={{ color: "blue.100" }}
+            className="[&.active]:font-bold"
+          >
             Settings
-          </Link>
+          </Box>
         </Flex>
         <Button onClick={logOut}>Sing Out</Button>
 

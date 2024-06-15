@@ -9,6 +9,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FaArrowRight, FaCheck } from "react-icons/fa";
+import { Fragment } from "react/jsx-runtime";
 
 const yearlyPlans = [
   {
@@ -146,9 +147,17 @@ const SubscriptionCard = ({ planType }: { planType: string }) => {
             fontFamily={"Arial"}
             boxShadow="0px 0px 5px 5px rgba(99, 179, 237, 0.1)"
           >
-            <Text fontWeight={900} fontSize={"2xl"} noOfLines={1}>
-              {plan.title}
-            </Text>
+            <Box width={"full"}>
+              <Text fontWeight={900} fontSize={"2xl"} textAlign={"center"}>
+                {plan.title.split(" ").map((word, index) => (
+                  <Fragment key={index}>
+                    {word}
+                    {index === 1 && <br />}
+                    {index !== 1 && " "}
+                  </Fragment>
+                ))}
+              </Text>
+            </Box>
             <Text fontSize={"xl"} color={textColor2}>
               {plan.price}
             </Text>

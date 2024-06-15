@@ -11,7 +11,7 @@ export const Route = createLazyFileRoute("/_auth/subscriptions")({
 function Index() {
   return (
     <Flex
-      p={8}
+      p={12}
       alignItems={"center"}
       justifyContent={"center"}
       height={"90vh"}
