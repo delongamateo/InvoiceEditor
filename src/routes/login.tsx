@@ -1,11 +1,20 @@
 import { Button, Center, Flex } from "@chakra-ui/react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useAuth } from "../hooks/useAuth";
 import { useLoginQuery } from "../api";
+import { useEffect } from "react";
 
 const Login = () => {
   const auth = useAuth();
   const { refetch } = useLoginQuery();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth.user) {
+      navigate({ to: "/" });
+    }
+  }, [auth.user, navigate]);
+
   return (
     <Center p={8}>
       <Flex

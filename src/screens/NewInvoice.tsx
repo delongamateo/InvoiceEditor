@@ -6,12 +6,14 @@ import {
   Input,
   Stack,
   useColorModeValue,
+  Text,
 } from "@chakra-ui/react";
 import { FieldApi, FormState, useField, useForm } from "@tanstack/react-form";
 import { zodValidator } from "@tanstack/zod-form-adapter";
 import { z } from "zod";
 import PDF, { DownloadPDF } from "../components/PDF";
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import { useGetInvoicesQuery } from "../api";
 
 function FieldInfo({ field }: { field: FieldApi<any, any, any, any> }) {
   return (
@@ -27,6 +29,7 @@ function FieldInfo({ field }: { field: FieldApi<any, any, any, any> }) {
 const NewInvoice = () => {
   const bgColor = useColorModeValue("rgba(0, 0, 0, 0.1)", "rgba(0, 0, 0, 0.4)");
   const textColor = useColorModeValue("black", "white");
+  const { refetch, data, isLoading } = useGetInvoicesQuery();
 
   const form = useForm({
     defaultValues: {
@@ -43,6 +46,8 @@ const NewInvoice = () => {
 
   const firstNameField = useField({ form, name: "firstName" });
 
+  console.log(data?.data?.IntuitResponse?.QueryResponse?.Invoice);
+
   return (
     <Flex gap={2} w={"full"}>
       <Stack p={8} w={"full"}>
@@ -54,16 +59,19 @@ const NewInvoice = () => {
           }}
         >
           <Stack
-            bg={bgColor}
-            color={textColor}
+            color="blue.400"
             backdropFilter="blur(10px)"
-            borderRadius="md"
-            p={4}
+            borderRadius="lg"
+            p={6}
+            align="center"
             justify="center"
             width="full"
-            minHeight="full"
-            boxShadow="xl"
-            gap={12}
+            boxShadow="0px 0px 5px 5px rgba(99, 179, 237, 0.1)"
+            fontFamily="Arial"
+            border="1px"
+            borderBottom="4px"
+            borderColor="blue.400"
+            transition="all 0.3s ease-in-out"
           >
             <Stack>
               <Stack>
@@ -138,6 +146,26 @@ const NewInvoice = () => {
       <Flex w={"full"}>
         <PDF value={firstNameField.getValue()} />
       </Flex>
+      <Stack>
+        <Button onClick={() => refetch()}>Fetch Invoices</Button>
+        {isLoading ? (
+          <Flex p={12}>
+            {" "}
+            <Text>Loading...</Text>
+          </Flex>
+        ) : (
+          <Stack height={"500px"} overflow={"scroll"}>
+            {data?.data?.IntuitResponse?.QueryResponse?.Invoice?.map(
+              (invoice: any) => (
+                <Flex p={12} gap={8}>
+                  <Text>Id:{invoice.Id}</Text>
+                  <Text>TotalAmt:{invoice.TotalAmt}</Text>
+                </Flex>
+              )
+            )}
+          </Stack>
+        )}
+      </Stack>
     </Flex>
   );
 };

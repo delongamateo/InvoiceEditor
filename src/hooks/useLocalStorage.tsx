@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 export const useLocalStorage = (
   keyName: string,
@@ -6,7 +7,7 @@ export const useLocalStorage = (
 ) => {
   const [storedValue, setStoredValue] = useState<string | null>(() => {
     try {
-      const value = window.localStorage.getItem(keyName);
+      const value = Cookies.get(keyName);
       if (value) {
         return JSON.parse(value);
       } else {

@@ -1,6 +1,8 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 
 import { useLocalStorage } from "./useLocalStorage";
+import Cookies from "js-cookie";
+import { useNavigate } from "@tanstack/react-router";
 
 export interface AuthContextType {
   login: (data: string) => Promise<void>;
@@ -12,6 +14,9 @@ const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { storedValue, setValue } = useLocalStorage("user", null);
+  const [token, setToken] = useState<{ [key: string]: string } | undefined>(
+    Cookies.get()
+  );
 
   // call this function when you want to authenticate the user
   const login = async (user: string | null) => {
@@ -20,16 +25,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   // call this function to sign out logged in user
   const logout = () => {
-    setValue(null);
+    setToken(undefined);
+    Cookies.remove("access_token");
   };
 
   const value = useMemo(
     () => ({
-      user: storedValue,
+      user: token?.access_token ?? null,
       login,
       logout,
     }),
-    [storedValue]
+    [token]
   );
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

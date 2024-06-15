@@ -4,15 +4,16 @@ import {
   Link,
   Outlet,
   redirect,
+  useNavigate,
   useRouter,
 } from "@tanstack/react-router";
 import { useAuth } from "../hooks/useAuth";
-import { Flex, Spacer } from "@chakra-ui/react";
+import { Button, Flex, Spacer } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
 
 export const Route = createFileRoute("/_auth")({
   beforeLoad: ({ context, location }) => {
-    if (context?.auth?.user) {
+    if (!context?.auth?.user) {
       throw redirect({
         to: "/login",
         search: {
@@ -26,8 +27,12 @@ export const Route = createFileRoute("/_auth")({
 
 function AuthLayout() {
   const router = useRouter();
-
+  const navigate = useNavigate();
   const auth = useAuth();
+
+  const logOut = () => {
+    auth.logout();
+  };
 
   return (
     <>
@@ -60,6 +65,7 @@ function AuthLayout() {
             Settings
           </Link>
         </Flex>
+        <Button onClick={logOut}>Sing Out</Button>
 
         <ColorModeSwitcher justifySelf="flex-end" />
       </Flex>
