@@ -19,7 +19,7 @@ const ToggleButton = ({
           setPlanType(planType === "monthly" ? "yearly" : "monthly")
         }
       />
-      <FormLabel mb="0" ml={4} fontSize={"xl"}>
+      <FormLabel mb="0" ml={4} fontSize={"xl"} color={"blue.400"}>
         Yearly Plans
       </FormLabel>
     </FormControl>

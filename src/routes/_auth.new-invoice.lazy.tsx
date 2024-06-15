@@ -10,7 +10,13 @@ export const Route = createLazyFileRoute("/_auth/new-invoice")({
 
 function Index() {
   return (
-    <Flex p={8}>
+    <Flex
+      p={12}
+      alignItems={"center"}
+      justifyContent={"center"}
+      height={"90vh"}
+      width={"full"}
+    >
       <NewInvoice />
     </Flex>
   );
