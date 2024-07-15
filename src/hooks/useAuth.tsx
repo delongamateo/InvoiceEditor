@@ -13,26 +13,25 @@ export interface AuthContextType {
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const { storedValue, setValue } = useLocalStorage("user", null);
   const [token, setToken] = useState<{ [key: string]: string } | undefined>(
     Cookies.get()
   );
 
   // call this function when you want to authenticate the user
-  const login = async (user: string | null) => {
-    setValue(user);
-  };
+  // const login = async (user: string | null) => {
+  //   setValue(user);
+  // };
 
   // call this function to sign out logged in user
   const logout = () => {
     setToken(undefined);
-    Cookies.remove("access_token");
+    Cookies.remove("access_token", { path: "/" });
   };
 
   const value = useMemo(
     () => ({
       user: token?.access_token ?? null,
-      login,
+      login: async () => console.log(""),
       logout,
     }),
     [token]
