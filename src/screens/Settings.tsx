@@ -5,7 +5,7 @@ import { SettingsStatusCard } from "../components/settingsStatusCard";
 
 const Settings = () => {
   return (
-    <Flex direction="row" justifyContent={"center"} gap={20}>
+    <Flex justifyContent={"center"} gap={20}>
       <SettingsInfoCard />
       <SettingsStatusCard />
     </Flex>

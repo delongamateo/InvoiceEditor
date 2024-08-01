@@ -16,10 +16,13 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useGetInvoicesQuery } from "../api";
 
 function FieldInfo({ field }: { field: FieldApi<any, any, any, any> }) {
+  console.log(field.state.meta.touchedErrors, "error");
   return (
     <>
       {field.state.meta.touchedErrors ? (
-        <FormErrorMessage>{field.state.meta.touchedErrors}</FormErrorMessage>
+        <FormErrorMessage>
+          <Text>{field.state.meta.touchedErrors}</Text>
+        </FormErrorMessage>
       ) : null}
       {field.state.meta.isValidating ? "Validating..." : null}
     </>
@@ -50,7 +53,7 @@ const NewInvoice = () => {
 
   return (
     <Flex gap={2} w={"full"}>
-      <Stack p={8} w={"full"}>
+      <Stack w={"full"}>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -135,6 +138,13 @@ const NewInvoice = () => {
                   )}
                 />
               </Stack>
+              <form.Subscribe
+                children={(state) => (
+                  <button type="submit" disabled={!state.canSubmit}>
+                    {state.isSubmitting ? "..." : "Submit"}
+                  </button>
+                )}
+              />
             </Stack>
             <DownloadPDF
               document={<PDF value={firstNameField.getValue()} />}

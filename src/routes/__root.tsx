@@ -15,12 +15,9 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
-    <Flex height={"100vh"} flexDirection={"column"}>
-      <TanStackRouterDevtools position="bottom-right" />
-
-      <hr />
-
+    <>
+      {/* <TanStackRouterDevtools position="bottom-right" /> */}
       <Outlet />
-    </Flex>
+    </>
   ),
 });

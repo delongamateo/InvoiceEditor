@@ -9,15 +9,5 @@ export const Route = createLazyFileRoute("/_auth/subscriptions")({
 });
 
 function Index() {
-  return (
-    <Flex
-      p={12}
-      alignItems={"center"}
-      justifyContent={"center"}
-      height={"90vh"}
-      width={"full"}
-    >
-      <Subscriptions />
-    </Flex>
-  );
+  return <Subscriptions />;
 }

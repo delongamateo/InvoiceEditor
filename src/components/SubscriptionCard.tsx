@@ -7,6 +7,7 @@ import {
   List,
   ListItem,
   useColorModeValue,
+  Stack,
 } from "@chakra-ui/react";
 import { FaArrowRight, FaCheck } from "react-icons/fa";
 import { Fragment } from "react/jsx-runtime";
@@ -123,29 +124,27 @@ const SubscriptionCard = ({ planType }: { planType: string }) => {
   return (
     <Flex
       width={"full"}
-      gap={8}
+      gap={4}
       alignItems={"center"}
       justifyContent={"space-around"}
     >
       {(planType === "monthly" ? monthlyPlans : yearlyPlans).map(
         (plan, index) => (
-          <Box
+          <Stack
             key={index}
             display={"flex"}
             flexDirection={"column"}
             color="blue.400"
             borderColor="blue.400"
-            transition="all 0.3s ease-in-out"
             border="1px"
-            borderBottom="4px"
             backdropFilter="blur(10px)"
-            p={8}
             borderRadius="lg"
             alignItems={"center"}
-            gap={6}
             width="20%"
             fontFamily={"Arial"}
             boxShadow="0px 0px 5px 5px rgba(99, 179, 237, 0.1)"
+            p={4}
+            gap={2}
           >
             <Box width={"full"}>
               <Text fontWeight={900} fontSize={"2xl"} textAlign={"center"}>
@@ -175,7 +174,7 @@ const SubscriptionCard = ({ planType }: { planType: string }) => {
             <Button leftIcon={<FaArrowRight />} colorScheme="blue">
               Choose This Plan
             </Button>
-          </Box>
+          </Stack>
         )
       )}
     </Flex>

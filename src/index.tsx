@@ -1,7 +1,6 @@
 import { ChakraProvider, ColorModeScript, theme } from "@chakra-ui/react";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
 import { queryClient } from "./api/useQueryContext";
@@ -10,6 +9,7 @@ import { AuthProvider } from "./hooks/useAuth";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 import RouteFile from "./RouteFile";
+import "./style.css";
 
 const container = document.getElementById("root");
 if (!container) throw new Error("Failed to find the root element");

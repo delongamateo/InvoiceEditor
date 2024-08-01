@@ -11,18 +11,12 @@ const Subscriptions = () => {
 
   return (
     <Flex
-      flexDirection={"column"}
-      alignItems={"center"}
-      justifyContent={"center"}
+      direction={"column"}
+      align={"center"}
+      justify={"center"}
       width={"full"}
-      gap={12}
-      fontFamily={"Arial"}
+      gap={8}
     >
-      <Flex
-        alignItems="center"
-        justifyContent={"center"}
-        flexDirection={"column"}
-      ></Flex>
 
       <ToggleButton planType={planType} setPlanType={setPlanType} />
       <SubscriptionCard planType={planType} />
@@ -33,7 +27,7 @@ const Subscriptions = () => {
         display={"flex"}
         alignItems={"start"}
       >
-        <Icon color={"blue.400"} as={FaRegCreditCard} boxSize={8} />
+        <Icon color={"blue.400"} as={FaRegCreditCard} boxSize={6} />
         Choose a plan that fits your needs. You can switch between monthly and
         yearly plans at any time.
       </Text>

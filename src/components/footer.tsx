@@ -1,5 +1,4 @@
 import { Flex, Icon, Link, Spacer, Text } from "@chakra-ui/react";
-import React from "react";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
@@ -7,14 +6,12 @@ const Footer = () => {
     <Flex
       direction={{ base: "column", md: "row" }}
       color="white"
-      p={4}
-      pl={14}
-      pr={14}
+      px={14}
+      py={2}
       bg="blue.400"
       align="center"
       justify="space-between"
-      fontFamily="Arial"
-      fontSize="lg"
+      fontSize="sm"
       width="full"
     >
       <Text mb={{ base: 4, md: 0 }}>
@@ -26,16 +23,44 @@ const Footer = () => {
       </Text>
       <Spacer />
       <Flex>
-        <Link href="https://www.facebook.com" isExternal mx={2}>
+        <Link
+          href="https://www.facebook.com"
+          isExternal
+          mx={2}
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
           <Icon as={FaFacebook} w={6} h={6} />
         </Link>
-        <Link href="https://www.twitter.com" isExternal mx={2}>
+        <Link
+          href="https://www.twitter.com"
+          isExternal
+          mx={2}
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
           <Icon as={FaTwitter} w={6} h={6} />
         </Link>
-        <Link href="https://www.instagram.com" isExternal mx={2}>
+        <Link
+          href="https://www.instagram.com"
+          isExternal
+          mx={2}
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
           <Icon as={FaInstagram} w={6} h={6} />
         </Link>
-        <Link href="https://www.linkedin.com" isExternal mx={2}>
+        <Link
+          href="https://www.linkedin.com"
+          isExternal
+          mx={2}
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
           <Icon as={FaLinkedin} w={6} h={6} />
         </Link>
       </Flex>

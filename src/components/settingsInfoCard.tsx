@@ -98,18 +98,15 @@ const SettingsInfoCard = () => {
       color={textColor2}
       backdropFilter="blur(10px)"
       borderRadius="lg"
-      p={8}
+      p={4}
       width="full"
       boxShadow="0px 0px 5px 5px rgba(99, 179, 237, 0.1)"
-      fontFamily="Arial"
       border="1px"
       borderBottom="4px"
       borderColor="blue.400"
-      transition="all 0.3s ease-in-out"
-      maxWidth={700}
     >
       <form onSubmit={handleSubmit(onSubmit)}>
-        <VStack spacing={6}>
+        <Stack>
           <Heading
             as="h3"
             size="md"
@@ -151,7 +148,7 @@ const SettingsInfoCard = () => {
           >
             Save
           </Button>
-        </VStack>
+        </Stack>
       </form>
     </Box>
   );

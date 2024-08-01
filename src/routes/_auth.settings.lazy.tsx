@@ -7,15 +7,5 @@ export const Route = createLazyFileRoute("/_auth/settings")({
 });
 
 function About() {
-  return (
-    <Flex
-      p={12}
-      alignItems={"center"}
-      justifyContent={"center"}
-      height={"90vh"}
-      width={"full"}
-    >
-      <Settings />
-    </Flex>
-  );
+  return <Settings />;
 }
