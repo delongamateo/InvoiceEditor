@@ -1,6 +1,5 @@
 import {
   Flex,
-  Text,
   Box,
   Icon,
   Button,
@@ -11,6 +10,9 @@ import {
 } from "@chakra-ui/react";
 import { FaArrowRight, FaCheck } from "react-icons/fa";
 import { Fragment } from "react/jsx-runtime";
+import Card from "./primitives/card";
+import Text from "./primitives/text";
+import Heading from "./primitives/heading";
 
 const yearlyPlans = [
   {
@@ -124,59 +126,42 @@ const SubscriptionCard = ({ planType }: { planType: string }) => {
   return (
     <Flex
       width={"full"}
-      gap={4}
+      gap={[2, 2, 4]}
       alignItems={"center"}
       justifyContent={"space-around"}
+      direction={["column", "column", "row"]}
     >
-      {(planType === "monthly" ? monthlyPlans : yearlyPlans).map(
-        (plan, index) => (
-          <Stack
-            key={index}
-            display={"flex"}
-            flexDirection={"column"}
-            color="blue.400"
-            borderColor="blue.400"
-            border="1px"
-            backdropFilter="blur(10px)"
-            borderRadius="lg"
-            alignItems={"center"}
-            width="20%"
-            fontFamily={"Arial"}
-            boxShadow="0px 0px 5px 5px rgba(99, 179, 237, 0.1)"
-            p={4}
-            gap={2}
-          >
-            <Box width={"full"}>
-              <Text fontWeight={900} fontSize={"2xl"} textAlign={"center"}>
+      {(planType === "monthly" ? monthlyPlans : yearlyPlans)
+        .slice(0, 2)
+        .map((plan, index) => (
+          <Card key={index}>
+            <Flex direction={"column"} gap={[2, 2, 4]}>
+              <Heading>
                 {plan.title.split(" ").map((word, index) => (
                   <Fragment key={index}>
                     {word}
-                    {index === 1 && <br />}
+                    {index === 1 && " "}
                     {index !== 1 && " "}
                   </Fragment>
                 ))}
-              </Text>
-            </Box>
-            <Text fontSize={"xl"} color={textColor2}>
-              {plan.price}
-            </Text>
-            <Text color={textColor2}>
-              Generate up to {plan.invoiceLimit} invoices
-            </Text>
-            <List spacing={3}>
-              {plan.benefits.map((benefit, index) => (
-                <ListItem key={index}>
-                  <Icon as={FaCheck} color="green.500" mr={2} />
-                  {benefit}
-                </ListItem>
-              ))}
-            </List>
-            <Button leftIcon={<FaArrowRight />} colorScheme="blue">
-              Choose This Plan
-            </Button>
-          </Stack>
-        )
-      )}
+              </Heading>
+
+              <Text>{plan.price}</Text>
+              <Text>Generate up to {plan.invoiceLimit} invoices</Text>
+              <List spacing={3}>
+                {plan.benefits.map((benefit, index) => (
+                  <ListItem key={index}>
+                    <Icon as={FaCheck} color="green.500" mr={2} />
+                    {benefit}
+                  </ListItem>
+                ))}
+              </List>
+              <Button leftIcon={<FaArrowRight />} colorScheme="blue">
+                Choose This Plan
+              </Button>
+            </Flex>
+          </Card>
+        ))}
     </Flex>
   );
 };

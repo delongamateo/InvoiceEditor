@@ -6,14 +6,15 @@ import {
   Input,
   Stack,
   useColorModeValue,
-  Text,
 } from "@chakra-ui/react";
 import { FieldApi, FormState, useField, useForm } from "@tanstack/react-form";
 import { zodValidator } from "@tanstack/zod-form-adapter";
 import { z } from "zod";
 import PDF, { DownloadPDF } from "../components/PDF";
-import { PDFDownloadLink } from "@react-pdf/renderer";
 import { useGetInvoicesQuery } from "../api";
+import Card from "../components/primitives/card";
+import Text from "../components/primitives/text";
+import QRCode from "qrcode";
 
 function FieldInfo({ field }: { field: FieldApi<any, any, any, any> }) {
   console.log(field.state.meta.touchedErrors, "error");
@@ -51,79 +52,46 @@ const NewInvoice = () => {
 
   console.log(data?.data?.IntuitResponse?.QueryResponse?.Invoice);
 
+  const urlPromise = QRCode.toDataURL("https://www.npmjs.com/package/qrcode");
+
   return (
-    <Flex gap={2} w={"full"}>
-      <Stack w={"full"}>
+    <Flex gap={[2, 4, 4, 6, 8]} w={"full"}>
+      <Card>
         <form
           onSubmit={(e) => {
             e.preventDefault();
             e.stopPropagation();
             form.handleSubmit();
           }}
+          style={{ width: "100%" }}
         >
-          <Stack
-            color="blue.400"
-            backdropFilter="blur(10px)"
-            borderRadius="lg"
-            p={6}
-            align="center"
-            justify="center"
-            width="full"
-            boxShadow="0px 0px 5px 5px rgba(99, 179, 237, 0.1)"
-            fontFamily="Arial"
-            border="1px"
-            borderBottom="4px"
-            borderColor="blue.400"
-            transition="all 0.3s ease-in-out"
-          >
-            <Stack>
-              <Stack>
-                {/* A type-safe field component*/}
-                <form.Field
-                  name="firstName"
-                  validators={{
-                    onChange: z
-                      .string()
-                      .min(3, "First name must be at least 3 characters"),
-                    onChangeAsyncDebounceMs: 500,
-                    onChangeAsync: z.string().refine(
-                      async (value) => {
-                        await new Promise((resolve) =>
-                          setTimeout(resolve, 1000)
-                        );
-                        return !value.includes("error");
-                      },
-                      {
-                        message: "No 'error' allowed in first name",
-                      }
-                    ),
-                  }}
-                  children={(field) => {
-                    // Avoid hasty abstractions. Render props are great!
-                    return (
-                      <>
-                        <FormLabel htmlFor={field.name}>First Name:</FormLabel>
-                        <Input
-                          id={field.name}
-                          name={field.name}
-                          value={field.state.value}
-                          onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
-                          bg={"white"}
-                          color={"black"}
-                        />
-                        <FieldInfo field={field} />
-                      </>
-                    );
-                  }}
-                />
-              </Stack>
-              <Stack>
-                <form.Field
-                  name="lastName"
-                  children={(field) => (
+          <Flex direction="column" gap={4}>
+            <Flex direction="column">
+              {/* A type-safe field component*/}
+              <form.Field
+                name="firstName"
+                validators={{
+                  onChange: z
+                    .string()
+                    .min(3, "First name must be at least 3 characters"),
+                  onChangeAsyncDebounceMs: 500,
+                  onChangeAsync: z.string().refine(
+                    async (value) => {
+                      await new Promise((resolve) => setTimeout(resolve, 1000));
+                      return !value.includes("error");
+                    },
+                    {
+                      message: "No 'error' allowed in first name",
+                    }
+                  ),
+                }}
+                children={(field) => {
+                  // Avoid hasty abstractions. Render props are great!
+                  return (
                     <>
-                      <FormLabel htmlFor={field.name}>Last Name:</FormLabel>
+                      <FormLabel htmlFor={field.name} fontSize={"xs"}>
+                        First Name:
+                      </FormLabel>
                       <Input
                         id={field.name}
                         name={field.name}
@@ -135,24 +103,48 @@ const NewInvoice = () => {
                       />
                       <FieldInfo field={field} />
                     </>
-                  )}
-                />
-              </Stack>
-              <form.Subscribe
-                children={(state) => (
-                  <button type="submit" disabled={!state.canSubmit}>
-                    {state.isSubmitting ? "..." : "Submit"}
-                  </button>
+                  );
+                }}
+              />
+            </Flex>
+            <Flex direction="column">
+              <form.Field
+                name="lastName"
+                children={(field) => (
+                  <>
+                    <FormLabel htmlFor={field.name} fontSize={"xs"}>
+                      Last Name:
+                    </FormLabel>
+                    <Input
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      bg={"white"}
+                      color={"black"}
+                    />
+                    <FieldInfo field={field} />
+                  </>
                 )}
               />
-            </Stack>
-            <DownloadPDF
-              document={<PDF value={firstNameField.getValue()} />}
-              fileName="invoice.pdf"
+            </Flex>
+
+            <form.Subscribe
+              children={(state) => (
+                <Button type="submit" disabled={!state.canSubmit}>
+                  {state.isSubmitting ? "..." : "Submit"}
+                </Button>
+              )}
             />
-          </Stack>
+          </Flex>
         </form>
-      </Stack>
+        <DownloadPDF
+          document={<PDF value={firstNameField.getValue()} />}
+          fileName="invoice.pdf"
+        />
+      </Card>
+
       <Flex w={"full"}>
         <PDF value={firstNameField.getValue()} />
       </Flex>

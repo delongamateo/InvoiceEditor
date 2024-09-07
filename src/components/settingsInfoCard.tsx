@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FaUsers } from "react-icons/fa";
+import Card from "./primitives/card";
 
 const schema = z.object({
   firstName: z
@@ -94,33 +95,16 @@ const SettingsInfoCard = () => {
     },
   ];
   return (
-    <Box
-      color={textColor2}
-      backdropFilter="blur(10px)"
-      borderRadius="lg"
-      p={4}
-      width="full"
-      boxShadow="0px 0px 5px 5px rgba(99, 179, 237, 0.1)"
-      border="1px"
-      borderBottom="4px"
-      borderColor="blue.400"
-    >
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack>
-          <Heading
-            as="h3"
-            size="md"
-            color={"blue.400"}
-            display={"flex"}
-            alignItems={"start"}
-            width={"full"}
-          >
+    <Card>
+      <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
+        <Flex direction={"column"} gap={[2, 2, 2, 2, 4]}>
+          <Heading as="h3" size="md" color={"blue.400"}>
             <Icon as={FaUsers} mr={2} />
             Company & User Information
           </Heading>
           {fields.map(({ label, name, type, options }) => (
             <FormControl id={name} key={name} isInvalid={!!errors[name]}>
-              <FormLabel>{label}</FormLabel>
+              <FormLabel fontSize={"xs"}>{label}</FormLabel>
               {type === "select" ? (
                 <Select {...register(name)}>
                   {options?.map((option) => (
@@ -148,9 +132,9 @@ const SettingsInfoCard = () => {
           >
             Save
           </Button>
-        </Stack>
+        </Flex>
       </form>
-    </Box>
+    </Card>
   );
 };
 export default SettingsInfoCard;

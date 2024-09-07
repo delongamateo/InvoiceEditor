@@ -1,78 +1,98 @@
 import { Box, Button, Flex, Icon, Spacer } from "@chakra-ui/react";
 import { FaReceipt } from "react-icons/fa";
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
-import { Link as RouterLink } from "@tanstack/react-router";
+import { Link as RouterLink, useParams } from "@tanstack/react-router";
 import { useAuth } from "../hooks/useAuth";
+import Text from "./primitives/text";
+import { useState } from "react";
 
 const Nav = () => {
+  // const route = useParams({
+  //   from: "/_auth",
+  // });
+
   const auth = useAuth();
   const logOut = () => {
     auth.logout();
   };
+  const looseParams = useParams({ strict: false });
+  console.log(looseParams);
+
+  const [route, setRoute] = useState("/");
 
   return (
     <Flex
-      color="white"
-      p={2}
-      px={14}
-      bg="blue.400"
-      align="center"
+      px={[4, 6, 12, 14]}
+      align="bottom"
       justify="space-between"
       fontWeight={600}
+      color={"gray.600"}
       fontSize="lg"
+      borderBottom={"2px solid"}
+      borderBottomColor={"gray.200"}
     >
-      <Flex gap={10}>
-        <Icon as={FaReceipt} boxSize={8} />
+      <Flex gap={[2, 4, 6, 10]} align={"center"}>
+        <Icon as={FaReceipt} boxSize={6} />
 
-        <Box
+        <Flex
           as={RouterLink}
           to="/"
-          _hover={{ color: "blue.100" }}
-          className="[&.active]:font-bold"
-          display={"flex"}
           alignItems={"center"}
           justifyContent={"center"}
+          onClick={() => setRoute("/")}
+          borderBottom={route === "/" ? "4px solid #2ca01c" : "none"}
+          fontWeight={route === "/" ? "600" : "400"}
+          height={"full"}
+          px={4}
         >
-          Dashboard
-        </Box>
+          <Text>Dashboard</Text>
+        </Flex>
         <Spacer />
-        <Box
+        <Flex
           as={RouterLink}
           to="/new-invoice"
-          _hover={{ color: "blue.100" }}
-          className="[&.active]:font-bold"
-          display={"flex"}
           alignItems={"center"}
           justifyContent={"center"}
+          onClick={() => setRoute("new-invoice")}
+          borderBottom={route === "new-invoice" ? "4px solid #2ca01c" : "none"}
+          fontWeight={route === "new-invoice" ? "600" : "400"}
+          height={"full"}
+          px={4}
         >
-          New Invoice
-        </Box>
+          <Text>New Invoice</Text>
+        </Flex>
         <Spacer />
-        <Box
+        <Flex
           as={RouterLink}
           to="/subscriptions"
-          _hover={{ color: "blue.100" }}
-          className="[&.active]:font-bold"
-          display={"flex"}
           alignItems={"center"}
           justifyContent={"center"}
+          onClick={() => setRoute("subscriptions")}
+          borderBottom={
+            route === "subscriptions" ? "4px solid #2ca01c" : "none"
+          }
+          height={"full"}
+          px={4}
+          fontWeight={route === "subscriptions" ? "600" : "400"}
         >
-          Subscriptions
-        </Box>
+          <Text>Subscriptions</Text>
+        </Flex>
         <Spacer />
-        <Box
+        <Flex
           as={RouterLink}
           to="/settings"
-          _hover={{ color: "blue.100" }}
-          className="[&.active]:font-bold"
-          display={"flex"}
           alignItems={"center"}
           justifyContent={"center"}
+          onClick={() => setRoute("settings")}
+          borderBottom={route === "settings" ? "4px solid #2ca01c" : "none"}
+          height={"full"}
+          px={4}
+          fontWeight={route === "settings" ? "600" : "400"}
         >
-          Settings
-        </Box>
+          <Text>Settings</Text>
+        </Flex>
       </Flex>
-      <Button onClick={logOut}>Sing Out</Button>
+      {/* <Button onClick={logOut}>Sing Out</Button> */}
 
       <ColorModeSwitcher justifySelf="flex-end" />
     </Flex>

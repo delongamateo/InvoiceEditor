@@ -1,4 +1,5 @@
 import { FormControl, FormLabel, Switch } from "@chakra-ui/react";
+import Text from "./primitives/text";
 
 const ToggleButton = ({
   planType,
@@ -8,20 +9,21 @@ const ToggleButton = ({
   setPlanType: (type: string) => void;
 }) => {
   return (
-    <FormControl display="flex" alignItems="center" justifyContent={"center"}>
-      <FormLabel mb="0" mr={4} fontSize={"xl"}>
-        Monthly Plans
-      </FormLabel>
+    <FormControl
+      display="flex"
+      alignItems="center"
+      justifyContent={"center"}
+      gap={2}
+    >
+      <Text>Monthly Plans</Text>
       <Switch
-        size="lg"
+        size={["md", "md", "lg"]}
         isChecked={planType === "yearly"}
         onChange={() =>
           setPlanType(planType === "monthly" ? "yearly" : "monthly")
         }
       />
-      <FormLabel mb="0" ml={4} fontSize={"xl"} color={"blue.400"}>
-        Yearly Plans
-      </FormLabel>
+      <Text>Yearly Plans</Text>
     </FormControl>
   );
 };

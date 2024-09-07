@@ -6,7 +6,11 @@ import {
   Document,
   StyleSheet,
   PDFDownloadLink,
+  Image,
+  Svg,
 } from "@react-pdf/renderer";
+import QRCode from "qrcode";
+import QRCodeLocal from "react-qr-code";
 
 const styles = StyleSheet.create({
   page: {
@@ -16,6 +20,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     display: "flex",
+    position: "relative",
   },
   section: {
     margin: 10,
@@ -36,14 +41,26 @@ interface PDFProps {
 }
 
 const PDF: FC<PDFProps> = ({ value }) => {
+  const urlPromise = QRCode.toDataURL("https://www.npmjs.com/package/qrcode");
+
   return (
-    <Document>
+    <Document style={{ width: "100%" }}>
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
           <Text>Name: {value}</Text>
         </View>
         <View style={styles.section}>
           <Text>Section #2</Text>
+        </View>
+        <View style={styles.section}>
+          <Image
+            source={urlPromise}
+            style={{
+              height: "64px",
+              width: "64px",
+            }}
+          />
+          <QRCodeLocal size={64} value="https://www.npmjs.com/package/qrcode" />
         </View>
       </Page>
     </Document>

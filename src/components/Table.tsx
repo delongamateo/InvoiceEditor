@@ -27,7 +27,7 @@ function Table<TData, TValue>({ columns, data }: TableProps<TData, TValue>) {
   });
 
   return (
-    <ChakraTable>
+    <ChakraTable h={"full"}>
       <Thead>
         {table.getHeaderGroups().map((headerGroup) => (
           <Tr key={headerGroup.id}>

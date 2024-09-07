@@ -6,6 +6,7 @@ import {
   redirect,
   useNavigate,
   useRouter,
+  useParams,
 } from "@tanstack/react-router";
 import { useAuth } from "../hooks/useAuth";
 import { Button, Flex, Spacer, Box, Icon, Stack } from "@chakra-ui/react";
@@ -29,13 +30,15 @@ export const Route = createFileRoute("/_auth")({
 });
 
 function AuthLayout() {
+  const param = useParams({ strict: false });
+  console.log(param, "ussss");
   return (
-    <Stack h={"full"}>
+    <Flex direction={"column"} h={"full"}>
       <Nav />
       <Box mx={6} h={"full"} py={2}>
         <Outlet />
       </Box>
       <Footer />
-    </Stack>
+    </Flex>
   );
 }

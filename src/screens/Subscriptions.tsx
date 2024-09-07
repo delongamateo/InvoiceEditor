@@ -15,9 +15,9 @@ const Subscriptions = () => {
       align={"center"}
       justify={"center"}
       width={"full"}
-      gap={8}
+      gap={[2, 2, 4]}
+      pt={[2, 2, 4]}
     >
-
       <ToggleButton planType={planType} setPlanType={setPlanType} />
       <SubscriptionCard planType={planType} />
       <Text

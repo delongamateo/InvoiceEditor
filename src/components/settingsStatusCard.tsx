@@ -3,7 +3,6 @@ import {
   Button,
   Flex,
   Box,
-  Text,
   useColorModeValue,
   Heading,
   Link,
@@ -19,30 +18,15 @@ import {
   FaRegCreditCard,
 } from "react-icons/fa";
 import { useNavigate } from "@tanstack/react-router";
+import Card from "./primitives/card";
+import Text from "./primitives/text";
 
 export const SettingsStatusCard = () => {
   const textColor2 = useColorModeValue("#4A5567", "#A0AEBF");
   const navigate = useNavigate();
 
   return (
-    <Box
-      display={"flex"}
-      flexDirection={"column"}
-      color="blue.400"
-      backdropFilter="blur(10px)"
-      borderRadius="lg"
-      p={8}
-      width="full"
-      boxShadow="0px 0px 5px 5px rgba(99, 179, 237, 0.1)"
-      fontFamily="Arial"
-      border="1px"
-      borderBottom="4px"
-      borderColor="blue.400"
-      transition="all 0.3s ease-in-out"
-      maxWidth={700}
-      gap={8}
-      height={"fit-content"}
-    >
+    <Card>
       <Heading
         display={"flex"}
         alignItems={"center"}
@@ -54,7 +38,7 @@ export const SettingsStatusCard = () => {
         Plan & QuickBooks Connection
       </Heading>
 
-      <Text color={textColor2}>
+      <Text>
         Here you can manage your subscription plan and QuickBooks connection.
         You can upgrade or downgrade your plan, and connect or disconnect from
         QuickBooks.
@@ -62,7 +46,7 @@ export const SettingsStatusCard = () => {
 
       <Box display="flex" alignItems="center">
         <Icon as={FaMoneyCheckAlt} mr={2} />
-        <Text color={textColor2}>Subscription Plan</Text>
+        <Text>Subscription Plan</Text>
       </Box>
 
       <Flex alignItems={"center"} gap={6}>
@@ -90,7 +74,7 @@ export const SettingsStatusCard = () => {
 
       <Box display="flex" alignItems="center">
         <Icon as={FaCloud} mr={2} />
-        <Text color={textColor2}>QuickBooks Connection Status</Text>
+        <Text>QuickBooks Connection Status</Text>
       </Box>
 
       <Flex alignItems={"center"} gap={6}>
@@ -113,6 +97,6 @@ export const SettingsStatusCard = () => {
           Disconnect from QuickBooks
         </Link>
       </Flex>
-    </Box>
+    </Card>
   );
 };
