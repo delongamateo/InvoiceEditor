@@ -22,12 +22,36 @@ export async function login() {
 }
 
 export async function getInvoices() {
-  const response = await axios.get(GET_INVOICES, {
-    headers: {
-      Authorization: `Bearer ${values.access_token}`,
-    },
-  });
-  return response.data;
+  try {
+    const response = await axios.get(GET_INVOICES, {
+      headers: {
+        Authorization: `Bearer ${Cookies.get('access_token')}`, // Use current access token from cookies
+      },
+    });
+
+    // Check if the response contains a new access token
+    const newAccessToken = response.headers.authorization;
+
+    // Only update the cookie if a new token is provided (e.g., after expiration)
+    if (newAccessToken && newAccessToken.startsWith('Bearer ')) {
+      // Remove the 'Bearer ' prefix from the token
+      const token = newAccessToken.replace('Bearer ', '');
+
+      // Set the new access token in the cookies (with expiration and path as needed)
+      Cookies.set('access_token', token); // Adjust expiry as needed
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching invoices:', error);
+
+    // Handle token expiration or other errors here if needed
+    // if (error.response && error.response.status === 401) {
+    //   // Token might be invalid or expired, redirect to login or handle refresh token flow
+    // }
+
+    throw error; // Re-throw error after logging
+  }
 }
 
 // Function to log out a user
