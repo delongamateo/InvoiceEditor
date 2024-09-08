@@ -98,7 +98,7 @@ const SettingsInfoCard = () => {
     <Card>
       <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
         <Flex direction={"column"} gap={[2, 2, 2, 2, 4]}>
-          <Heading as="h3" size="md" color={"blue.400"}>
+          <Heading as="h3" size="md" color={"green.400"}>
             <Icon as={FaUsers} mr={2} />
             Company & User Information
           </Heading>
@@ -117,7 +117,7 @@ const SettingsInfoCard = () => {
                 <Input
                   {...register(name)}
                   type={type || "text"}
-                  focusBorderColor="blue.400"
+                  focusBorderColor="green.400"
                 />
               )}
               <FormErrorMessage>{errors[name]?.message}</FormErrorMessage>
@@ -125,9 +125,9 @@ const SettingsInfoCard = () => {
           ))}
           <Button
             type="submit"
-            colorScheme="blue"
+            colorScheme="green"
             width={"full"}
-            _hover={{ bg: "blue.500" }}
+            _hover={{ bg: "green.300" }}
             _active={{ bg: "blue.600", transform: "scale(0.95)" }}
           >
             Save

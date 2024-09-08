@@ -22,6 +22,7 @@ const ToggleButton = ({
         onChange={() =>
           setPlanType(planType === "monthly" ? "yearly" : "monthly")
         }
+        colorScheme="green"
       />
       <Text>Yearly Plans</Text>
     </FormControl>

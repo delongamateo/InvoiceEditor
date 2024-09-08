@@ -8,7 +8,7 @@ const Footer = () => {
       color="white"
       px={14}
       py={2}
-      bg="blue.400"
+      bg="green.500"
       align="center"
       justify="space-between"
       fontSize="sm"

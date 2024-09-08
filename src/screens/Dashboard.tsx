@@ -93,6 +93,7 @@ const Dashboard = () => {
             alignItems={"center"}
             textAlign={"center"}
             gap={[2, 2, 4]}
+            color={textColor}
           >
             <Box display="flex" alignItems="center" gap={4} color={textColor}>
               <Icon as={FaQrcode} w={8} h={8} />
@@ -136,7 +137,7 @@ const Dashboard = () => {
               value={30}
               w={"full"}
               borderRadius={"xl"}
-              colorScheme="blue"
+              colorScheme="green"
               size="lg"
               boxShadow="0px 0px 10px 5px rgba(99, 179, 237, 0.3)"
             />

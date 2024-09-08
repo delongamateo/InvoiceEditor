@@ -32,8 +32,7 @@ const Nav = () => {
       borderBottomColor={"gray.200"}
     >
       <Flex gap={[2, 4, 6, 10]} align={"center"}>
-        <Icon as={FaReceipt} boxSize={6} />
-
+        <Icon as={FaReceipt} boxSize={6} color="green" />
         <Flex
           as={RouterLink}
           to="/"

@@ -14,8 +14,10 @@ const Subscriptions = () => {
       direction={"column"}
       align={"center"}
       justify={"center"}
-      width={"full"}
-      gap={[2, 2, 4]}
+      width={"70%"}
+      margin={"auto"}
+      height={"full"}
+      gap={[2, 2, 12]}
       pt={[2, 2, 4]}
     >
       <ToggleButton planType={planType} setPlanType={setPlanType} />
@@ -27,7 +29,7 @@ const Subscriptions = () => {
         display={"flex"}
         alignItems={"start"}
       >
-        <Icon color={"blue.400"} as={FaRegCreditCard} boxSize={6} />
+        <Icon color={"green"} as={FaRegCreditCard} boxSize={6} />
         Choose a plan that fits your needs. You can switch between monthly and
         yearly plans at any time.
       </Text>

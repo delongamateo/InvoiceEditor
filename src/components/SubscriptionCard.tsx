@@ -156,7 +156,7 @@ const SubscriptionCard = ({ planType }: { planType: string }) => {
                   </ListItem>
                 ))}
               </List>
-              <Button leftIcon={<FaArrowRight />} colorScheme="blue">
+              <Button leftIcon={<FaArrowRight />} colorScheme="green">
                 Choose This Plan
               </Button>
             </Flex>
